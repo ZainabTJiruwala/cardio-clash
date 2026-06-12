@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  ecg-postgres:
+    image: postgres:15-alpine
+    container_name: ecg-postgres
+    environment:
+      POSTGRES_DB: ecg_db
+      POSTGRES_USER: ecg_user
+      POSTGRES_PASSWORD: ecg_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ecg-network
+
+  ecg-redis:
+    image: redis:7-alpine
+    container_name: ecg-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ecg-network
+
+  ecg-backend:
+    build: .
+    container_name: ecg-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ecg-postgres:5432/ecg_db
+      - SPRING_DATA_REDIS_HOST=ecg-redis
+    depends_on:
+      - ecg-postgres
+      - ecg-redis
+    networks:
+      - ecg-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  ecg-network:
+    driver: bridge

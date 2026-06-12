@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ecg.analyzer.controller.EcgAnalyzerController"
+            stylesheets="@/styles/application.css">
+    
+    <!-- Top: Menu Bar and Toolbar -->
+    <top>
+        <VBox>
+            <!-- Menu Bar -->
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Open ECG File..." onAction="#handleLoadFile"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit"/>
+                </Menu>
+                <Menu text="Analysis">
+                    <MenuItem text="Run Analysis" onAction="#handleRunAnalysis"/>
+                    <MenuItem text="Clear Results" onAction="#handleClearResults"/>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="User Guide"/>
+                    <MenuItem text="About"/>
+                </Menu>
+            </MenuBar>
+            
+            <!-- Toolbar -->
+            <ToolBar>
+                <Button fx:id="loadFileButton" text="📁 Load File" onAction="#handleLoadFile" 
+                        styleClass="toolbar-button"/>
+                <Separator orientation="VERTICAL"/>
+                <Button fx:id="runAnalysisButton" text="▶️ Run Analysis" onAction="#handleRunAnalysis"
+                        styleClass="primary-button"/>
+                <Button fx:id="clearResultsButton" text="🔄 Clear" onAction="#handleClearResults"/>
+                <Separator orientation="VERTICAL"/>
+                <Button fx:id="exportPdfButton" text="📄 Export PDF" onAction="#handleExportPdf"
+                        disable="true"/>
+                <Button fx:id="exportChartButton" text="📊 Export Chart" onAction="#handleExportChart"
+                        disable="true"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="themeToggleButton" text="🌙" onAction="#handleToggleTheme"
+                        styleClass="toolbar-button"/>
+            </ToolBar>
+        </VBox>
+    </top>
+    
+    <!-- Left: Control Panel -->
+    <left>
+        <VBox spacing="10" styleClass="control-panel">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            
+            <!-- Data Loading Section -->
+            <TitledPane text="📂 Data Source" collapsible="false">
+                <VBox spacing="10">
+                    <Label fx:id="fileInfoLabel" text="No file loaded" wrapText="true" 
+                           styleClass="info-label"/>
+                </VBox>
+            </TitledPane>
+            
+            <!-- Detection Configuration -->
+            <TitledPane text="⚙️ Detection Settings" collapsible="false">
+                <VBox spacing="10">
+                    <Label text="Algorithm:" styleClass="section-label"/>
+                    <RadioButton fx:id="ruleBasedRadio" text="Rule-Based Detection" selected="true">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="detectorGroup"/>
+                        </toggleGroup>
+                    </RadioButton>
+                    <RadioButton fx:id="mlBasedRadio" text="ML-Based Detection (DL4J)" 
+                                 toggleGroup="$detectorGroup"/>
+                    
+                    <Separator/>
+                    
+                    <Label text="Detect:" styleClass="section-label"/>
+                    <CheckBox text="Tachycardia" selected="true"/>
+                    <CheckBox text="Bradycardia" selected="true"/>
+                    <CheckBox text="Arrhythmias" selected="true"/>
+                    <CheckBox fx:id="detectMiCheckbox" text="Myocardial Infarction"/>
+                    <CheckBox fx:id="detectMurmurCheckbox" text="Heart Murmurs"/>
+                </VBox>
+            </TitledPane>
+            
+            <!-- Signal Processing -->
+            <TitledPane text="🔬 Signal Processing" collapsible="false">
+                <VBox spacing="10">
+                    <CheckBox fx:id="bandpassFilterCheckbox" text="Bandpass Filter (5-15 Hz)" selected="true"/>
+                    <CheckBox fx:id="baselineRemovalCheckbox" text="Baseline Wander Removal"/>
+                    <CheckBox fx:id="noiseReductionCheckbox" text="Noise Reduction"/>
+                </VBox>
+            </TitledPane>
+            
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Info Box -->
+            <VBox spacing="5" styleClass="info-box">
+                <Label text="ℹ️ Quick Start" styleClass="info-title">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <Label text="1. Load an ECG CSV file" wrapText="true"/>
+                <Label text="2. Click 'Run Analysis'" wrapText="true"/>
+                <Label text="3. Review detected anomalies" wrapText="true"/>
+            </VBox>
+        </VBox>
+    </left>
+    
+    <!-- Center: Main Content Area -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <!-- ECG Chart -->
+            <VBox VBox.vgrow="ALWAYS">
+                <Label text="ECG Waveform" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Label>
+                <LineChart fx:id="ecgChart" VBox.vgrow="ALWAYS" animated="false">
+                    <xAxis>
+                        <NumberAxis fx:id="xAxis" side="BOTTOM" label="Time (s)"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" side="LEFT" label="Amplitude (mV)"/>
+                    </yAxis>
+                </LineChart>
+            </VBox>
+            
+            <!-- Metrics Dashboard -->
+            <GridPane hgap="15" vgap="10" styleClass="metrics-panel">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                
+                <!-- Heart Rate -->
+                <VBox spacing="5" styleClass="metric-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Heart Rate" styleClass="metric-label"/>
+                    <Label fx:id="heartRateLabel" text="--" styleClass="metric-value"/>
+                    <Label fx:id="heartRateStatus" text="--" styleClass="metric-status"/>
+                </VBox>
+                
+                <!-- RR Interval -->
+                <VBox spacing="5" styleClass="metric-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="RR Interval" styleClass="metric-label"/>
+                    <Label fx:id="rrIntervalLabel" text="--" styleClass="metric-value"/>
+                    <Label text="Average" styleClass="metric-status"/>
+                </VBox>
+                
+                <!-- R-Peaks Count -->
+                <VBox spacing="5" styleClass="metric-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label text="R-Peaks Detected" styleClass="metric-label"/>
+                    <Label fx:id="rPeaksCountLabel" text="--" styleClass="metric-value"/>
+                    <Label text="Count" styleClass="metric-status"/>
+                </VBox>
+                
+                <!-- Processing Time -->
+                <VBox spacing="5" styleClass="metric-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <Label text="Processing Time" styleClass="metric-label"/>
+                    <Label fx:id="processingTimeLabel" text="--" styleClass="metric-value"/>
+                    <Label text="Milliseconds" styleClass="metric-status"/>
+                </VBox>
+                
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="25"/>
+                    <ColumnConstraints percentWidth="25"/>
+                    <ColumnConstraints percentWidth="25"/>
+                    <ColumnConstraints percentWidth="25"/>
+                </columnConstraints>
+            </GridPane>
+            
+            <!-- Anomaly Results Table -->
+            <VBox spacing="5">
+                <Label text="Detected Anomalies" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Label>
+                <TableView fx:id="anomalyTable" VBox.vgrow="ALWAYS" minHeight="150">
+                    <columns>
+                        <TableColumn fx:id="timestampColumn" text="Timestamp" prefWidth="100"/>
+                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="180"/>
+                        <TableColumn fx:id="severityColumn" text="Severity" prefWidth="120"/>
+                        <TableColumn fx:id="confidenceColumn" text="Confidence" prefWidth="100"/>
+                        <TableColumn fx:id="detailsColumn" text="Details" prefWidth="300"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No anomalies detected. Run analysis to see results."/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+    
+    <!-- Bottom: Status Bar -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="status-bar">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <Label fx:id="statusLabel" text="Ready" HBox.hgrow="ALWAYS"/>
+            <ProgressBar fx:id="progressBar" prefWidth="200" visible="false"/>
+        </HBox>
+    </bottom>
+    
+</BorderPane>

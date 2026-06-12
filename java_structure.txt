@@ -1,0 +1,243 @@
+
+📁 Project Structure
+Java_project/
+├── src/
+│   ├── main/
+│   │   ├── java/com/ecg/analyzer/
+│   │   │   ├── model/                          # Data Model Layer
+│   │   │   │   ├── EcgDataPoint.java          # Single ECG measurement
+│   │   │   │   ├── EcgSignal.java             # Complete ECG recording
+│   │   │   │   ├── Anomaly.java               # Detected anomaly
+│   │   │   │   └── AnomalyType.java           # Enum of cardiac conditions
+│   │   │   │
+│   │   │   ├── repository/                     # Data Access Layer
+│   │   │   │   ├── EcgDataRepository.java     # Repository interface
+│   │   │   │   ├── CsvEcgDataRepository.java  # CSV loader for Kaggle
+│   │   │   │   └── DataValidationException.java
+│   │   │   │
+│   │   │   ├── service/                        # Business Logic Layer
+│   │   │   │   ├── AnalysisService.java       # Main orchestrator
+│   │   │   │   ├── detector/
+│   │   │   │   │   ├── AnomalyDetector.java   # Detector interface
+│   │   │   │   │   ├── RuleBasedDetector.java # HR-based detection
+│   │   │   │   │   └── MLBasedDetector.java   # ML placeholder
+│   │   │   │   └── preprocessing/
+│   │   │   │       └── RPeakDetector.java     # QRS detection
+│   │   │   │
+│   │   │   ├── controller/                     # Controller Layer
+│   │   │   │   └── EcgAnalyzerController.java # UI controller
+│   │   │   │
+│   │   │   └── EcgAnalyzerApp.java            # Main launcher
+│   │   │
+│   │   └── resources/
+│   │       ├── view/
+│   │       │   └── MainView.fxml              # UI layout
+│   │       ├── styles/
+│   │       │   └── application.css            # Styling
+│   │       ├── datasets/
+│   │       │   └── sample_ecg.csv             # Test data
+│   │       ├── application.properties          # Configuration
+│   │       └── logback.xml                    # Logging config
+│   │
+│   └── test/                                   # Tests (future)
+├── pom.xml                                     # Maven config
+├── README.md                                   # Documentation
+└── .gitignore                                  # Git ignore rules
+✨ Features Implemented
+1. Data Model Layer ✅
+Java Records for immutable data (Java 17+)
+EcgDataPoint
+: Individual ECG measurements (time, amplitude)
+EcgSignal
+: Complete recordings with metadata
+Anomaly
+: Detected issues with severity and confidence
+AnomalyType: 7 cardiac conditions supported
+2. Data Access Layer ✅
+Repository pattern for flexible data sources
+CSV parser supporting multiple Kaggle dataset formats:
+Time-based format (time, amplitude)
+Index-based format (index, amplitude - auto-converts to time)
+Multi-lead support (uses first lead)
+Smart data validation and error handling
+3. Business Logic Layer ✅
+AnalysisService: Orchestrates entire workflow
+R-Peak Detection: Local maxima algorithm with refractory period
+Rule-Based Detector: Detects:
+✅ Tachycardia (HR > 100 BPM)
+✅ Bradycardia (HR < 60 BPM)
+✅ Arrhythmias (RR interval variability > 30%)
+✅ Premature contractions (short RR intervals)
+ML Detector: Placeholder for future DL4J integration
+4. Controller Layer ✅
+Event handlers for all UI actions
+Background task execution (non-blocking UI)
+Progress indicators and status updates
+Error handling with user-friendly dialogs
+5. Presentation Layer (UI) ✅
+Layout:
+
+┌────────────────────────────────────────────────────────┐
+│  Menu & Toolbar (Load, Analyze, Clear)                │
+├──────────────┬─────────────────────────────────────────┤
+│              │  ECG Waveform Chart                     │
+│  Control     │  (Interactive LineChart)                │
+│  Panel       │                                         │
+│              ├─────────────────────────────────────────┤
+│  - Load File │  Metrics Dashboard                      │
+│  - Detector  │  [HR] [RR] [R-Peaks] [Time]            │
+│  - Settings  │                                         │
+│              ├─────────────────────────────────────────┤
+│              │  Anomaly Results Table                  │
+│              │  (Timestamp, Type, Severity, ...)      │
+└──────────────┴─────────────────────────────────────────┘
+│  Status Bar & Progress                               │
+└────────────────────────────────────────────────────────┘
+Features:
+
+Professional medical-grade color scheme
+Interactive ECG chart with zoom capability
+R-peak markers overlaid on signal
+Live metrics dashboard with color-coded status
+Detailed anomaly table with double-click to jump
+Responsive design (1200x700 minimum)
+🛠️ Technology Stack
+Category	Technology	Purpose
+UI Framework	JavaFX 21	Desktop UI
+Build Tool	Maven 3.6+	Dependency management
+Language	Java 17	Modern Java features (Records)
+Signal Processing	Apache Commons Math 3.6	Statistical analysis
+CSV Parsing	Apache Commons CSV 1.10	Data loading
+ML Framework	DeepLearning4J 1.0	Future ML models
+Logging	SLF4J + Logback	Application logging
+Testing	JUnit 5	Unit tests (planned)
+🚀 How to Run
+Option 1: IntelliJ IDEA (Recommended)
+Open IntelliJ IDEA
+Import Project:
+File → Open
+Select: c:\Users\taham\OneDrive\Java_project
+Wait for Maven to download dependencies
+Run:
+Open EcgAnalyzerApp.java
+Click green ▶️ button
+Application launches!
+Option 2: Command Line
+cd c:\Users\taham\OneDrive\Java_project
+# Run directly
+mvn clean javafx:run
+# Or build JAR first
+mvn clean package
+java -jar target/ecg-analyzer-1.0.0.jar
+📊 Testing with Sample Data
+Built-in Sample: src/main/resources/datasets/sample_ecg.csv
+
+Pre-loaded test file with simulated heartbeats
+Contains 4 R-peaks over ~1.2 seconds
+Download Real Datasets from Kaggle:
+
+MIT-BIH Arrhythmia Database
+PTB-XL ECG Database
+🎯 What Works Right Now
+✅ Fully Functional:
+
+Load CSV files (multiple formats)
+Display ECG waveforms in chart
+Detect R-peaks automatically
+Calculate heart rate from RR intervals
+Detect tachycardia and bradycardia
+Detect arrhythmias and premature beats
+Professional UI with metrics and results table
+Export-ready architecture
+⏳ Planned (Placeholders ready):
+
+ML-based MI detection (requires trained model)
+ML-based heart murmur detection (requires trained model)
+Advanced signal filtering (bandpass, baseline)
+PDF report export
+Batch file processing
+📝 Configuration Files
+pom.xml - Maven Dependencies
+JavaFX (controls, FXML, graphics)
+Apache Commons (Math, CSV)
+DeepLearning4J + ND4J (ML)
+SLF4J + Logback (logging)
+application.properties - Settings
+Detection thresholds (tachycardia: 100 BPM, etc.)
+Signal processing parameters (sampling rate: 360 Hz)
+UI configuration (chart max points: 2000)
+logback.xml - Logging
+Console output with timestamps
+File logging to logs/ecg-analyzer.log
+🏗️ Architecture Highlights
+Separation of Concerns
+Each layer has a single responsibility:
+
+Model: Data structure definitions
+Repository: Data I/O operations
+Service: Business algorithms
+Controller: UI coordination
+View: User presentation
+Design Patterns Used
+✅ Repository Pattern: Abstract data access
+✅ Strategy Pattern: Pluggable anomaly detectors
+✅ Observer Pattern: JavaFX property binding
+✅ Immutable Data: Java Records prevent bugs
+✅ Dependency Injection: Services injected into controller
+Testability
+Each layer can be unit tested independently
+No UI dependencies in business logic
+Mock repositories for testing without files
+🎨 UI Design Principles
+Color Palette:
+
+Primary: #3498DB (Blue) - Actions, highlights
+Success: #27AE60 (Green) - Normal states
+Warning: #F39C12 (Orange) - Borderline
+Danger: #E74C3C (Red) - Critical anomalies
+Background: #ECF0F1 (Light gray)
+Dark: #2C3E50 (Navy) - Headers, text
+Medical-Grade Design:
+
+High contrast for readability
+Clear typography (Segoe UI)
+Color-coded severity indicators
+Professional, clinical aesthetic
+Grid lines on charts for precision
+📚 Next Steps
+Import into IntelliJ IDEA
+
+Maven will download ~200MB of dependencies
+First build takes 2-3 minutes
+Test with Sample Data
+
+Run application
+Load sample_ecg.csv from resources
+Verify R-peak detection and metrics
+Download Kaggle Datasets
+
+Create Kaggle account
+Download MIT-BIH or PTB-XL
+Test with real cardiac data
+Future Enhancements
+
+Train ML models for MI/murmur detection
+Implement Pan-Tompkins R-peak algorithm
+Add signal filtering components
+Create PDF report generator
+📖 Documentation
+README.md: Complete user guide
+Inline Comments: Extensive JavaDoc throughout
+Logging: All major operations logged
+Architecture Diagram: See README for layer breakdown
+✅ Quality Checklist
+ Clean architecture with 5 layers
+ No circular dependencies
+ Extensive error handling
+ Background task execution (UI stays responsive)
+ Professional UI design
+ Configurable parameters
+ Logging infrastructure
+ Sample data included
+ Complete documentation
+ Git-ready with .gitignorev

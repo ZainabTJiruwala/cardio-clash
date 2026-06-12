@@ -1,0 +1,348 @@
+/* ECG Analyzer Dark Theme */
+
+/* Root styling */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 12pt;
+    -fx-base: #2b2b2b;
+    -fx-background: #1e1e1e;
+}
+
+/* Control Panel */
+.control-panel {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 1 0 0;
+    -fx-min-width: 280px;
+    -fx-max-width: 280px;
+}
+
+.control-panel .titled-pane {
+    -fx-background-color: #2b2b2b;
+}
+
+.control-panel .titled-pane>.title {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.control-panel .titled-pane>*.content {
+    -fx-background-color: #2b2b2b;
+    -fx-padding: 10;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #5DADE2;
+}
+
+.button:disabled {
+    -fx-opacity: 0.5;
+}
+
+.primary-button {
+    -fx-background-color: #27AE60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13pt;
+}
+
+.primary-button:hover {
+    -fx-background-color: #2ECC71;
+}
+
+.toolbar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e0;
+}
+
+.toolbar-button:hover {
+    -fx-background-color: #404040;
+}
+
+/* Labels */
+.section-title {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-weight: bold;
+    -fx-font-size: 14pt;
+}
+
+.section-label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-weight: bold;
+    -fx-font-size: 11pt;
+}
+
+.info-label {
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 10pt;
+}
+
+.label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Metrics Dashboard */
+.metrics-panel {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #404040;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.metric-card {
+    -fx-background-color: #363636;
+    -fx-border-color: #505050;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+
+.metric-label {
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 10pt;
+}
+
+.metric-value {
+    -fx-text-fill: #3498DB;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+}
+
+.metric-status {
+    -fx-text-fill: #909090;
+    -fx-font-size: 9pt;
+}
+
+/* Chart Styling */
+.chart {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #404040;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.chart-plot-background {
+    -fx-background-color: #1e1e1e;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #404040;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 1.5px;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: #3498DB;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #E74C3C;
+}
+
+.chart-legend {
+    -fx-background-color: #363636;
+    -fx-border-color: #505050;
+    -fx-border-width: 1;
+}
+
+.chart-legend-item-text {
+    -fx-text-fill: #e0e0e0;
+}
+
+.axis {
+    -fx-tick-label-fill: #b0b0b0;
+}
+
+.axis-label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Table View */
+.table-view {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #404040;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.table-view .column-header {
+    -fx-background-color: #34495E;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.table-row-cell {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #323232;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #2b2b2b;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #404040;
+    -fx-cursor: hand;
+}
+
+.table-cell {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Status Bar */
+.status-bar {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #404040;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-bar .label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 10pt;
+}
+
+/* Info Box */
+.info-box {
+    -fx-background-color: #1a3a2e;
+    -fx-border-color: #27AE60;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+}
+
+.info-title {
+    -fx-text-fill: #2ECC71;
+    -fx-font-weight: bold;
+}
+
+.info-box .label {
+    -fx-text-fill: #52BE80;
+    -fx-font-size: 10pt;
+}
+
+/* Radio Buttons and Checkboxes */
+.radio-button,
+.check-box {
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button .radio,
+.check-box .box {
+    -fx-background-color: #404040;
+    -fx-border-color: #707070;
+}
+
+.radio-button:selected .radio,
+.check-box:selected .box {
+    -fx-background-color: #3498DB;
+}
+
+/* Menu Bar */
+.menu-bar {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #e0e0e0;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #363636;
+}
+
+.context-menu {
+    -fx-background-color: #2b2b2b;
+}
+
+.menu-item .label {
+    -fx-text-fill: #e0e0e0;
+}
+
+.menu-item:focused {
+    -fx-background-color: #3498DB;
+}
+
+/* Toolbar */
+.tool-bar {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 0 1 0;
+    -fx-spacing: 8;
+    -fx-padding: 8;
+}
+
+/* Progress Bar */
+.progress-bar {
+    -fx-background-color: #404040;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #3498DB;
+}
+
+/* Scrollbar */
+.scroll-bar {
+    -fx-background-color: #2b2b2b;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #606060;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #707070;
+}
+
+/* Separator */
+.separator {
+    -fx-background-color: #404040;
+}
+
+/* Text Input */
+.text-field,
+.text-area {
+    -fx-background-color: #363636;
+    -fx-text-fill: #e0e0e0;
+    -fx-prompt-text-fill: #808080;
+    -fx-border-color: #505050;
+}
+
+.text-field:focused,
+.text-area:focused {
+    -fx-border-color: #3498DB;
+}

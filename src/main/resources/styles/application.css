@@ -1,0 +1,296 @@
+/* ECG Analyzer Application Styles */
+
+/* Root styling */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 12pt;
+    -fx-base: #ECF0F1;
+    -fx-background: #ECF0F1;
+}
+
+/* Control Panel */
+.control-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 0 1 0 0;
+    -fx-min-width: 280px;
+    -fx-max-width: 280px;
+}
+
+.control-panel .titled-pane {
+    -fx-background-color: #FFFFFF;
+}
+
+.control-panel .titled-pane > .title {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.control-panel .titled-pane > *.content {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2980B9;
+}
+
+.button:disabled {
+    -fx-opacity: 0.5;
+}
+
+.primary-button {
+    -fx-background-color: #27AE60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13pt;
+}
+
+.primary-button:hover {
+    -fx-background-color: #229954;
+}
+
+.toolbar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2C3E50;
+}
+
+.toolbar-button:hover {
+    -fx-background-color: #D5DBDB;
+}
+
+/* Labels */
+.section-title {
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+    -fx-font-size: 14pt;
+}
+
+.section-label {
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+    -fx-font-size: 11pt;
+}
+
+.info-label {
+    -fx-text-fill: #7F8C8D;
+    -fx-font-size: 10pt;
+}
+
+/* Metrics Dashboard */
+.metrics-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.metric-card {
+    -fx-background-color: #F8F9F9;
+    -fx-border-color: #D5DBDB;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+
+.metric-label {
+    -fx-text-fill: #7F8C8D;
+    -fx-font-size: 10pt;
+}
+
+.metric-value {
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+}
+
+.metric-status {
+    -fx-text-fill: #95A5A6;
+    -fx-font-size: 9pt;
+}
+
+/* Chart Styling */
+.chart {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.chart-plot-background {
+    -fx-background-color: #FDFEFE;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #E8EAED;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 1.5px;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: #3498DB;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #E74C3C;
+}
+
+.chart-legend {
+    -fx-background-color: #F8F9F9;
+    -fx-border-color: #D5DBDB;
+    -fx-border-width: 1;
+}
+
+/* Table View */
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.table-view .column-header {
+    -fx-background-color: #34495E;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.table-row-cell {
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FDFEFE;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #D6EAF8;
+    -fx-text-fill: #2C3E50;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #EBF5FB;
+    -fx-cursor: hand;
+}
+
+/* Status Bar */
+.status-bar {
+    -fx-background-color: #34495E;
+    -fx-border-color: #2C3E50;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-bar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+}
+
+/* Info Box */
+.info-box {
+    -fx-background-color: #E8F8F5;
+    -fx-border-color: #27AE60;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+}
+
+.info-title {
+    -fx-text-fill: #117A65;
+    -fx-font-weight: bold;
+}
+
+.info-box .label {
+    -fx-text-fill: #1E8449;
+    -fx-font-size: 10pt;
+}
+
+/* Radio Buttons and Checkboxes */
+.radio-button,
+.check-box {
+    -fx-text-fill: #2C3E50;
+}
+
+.radio-button:selected .radio,
+.check-box:selected .box {
+    -fx-background-color: #3498DB;
+}
+
+/* Menu Bar */
+.menu-bar {
+    -fx-background-color: #34495E;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #2C3E50;
+}
+
+.context-menu {
+    -fx-background-color: #FFFFFF;
+}
+
+/* Toolbar */
+.tool-bar {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 0 0 1 0;
+    -fx-spacing: 8;
+    -fx-padding: 8;
+}
+
+/* Progress Bar */
+.progress-bar {
+    -fx-accent: #3498DB;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #3498DB;
+}
+
+/* Scrollbar */
+.scroll-bar {
+    -fx-background-color: #ECF0F1;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #95A5A6;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #7F8C8D;
+}
+
+/* Separator */
+.separator {
+    -fx-background-color: #BDC3C7;
+}
