@@ -81,23 +81,12 @@
             <optional>true</optional>
         </dependency>
         
-        <!-- Reuse existing ML/DL4J Logic by adding dependencies manually -->
-        <!-- We will copy the source code, but need libs -->
+        <!-- Reuse existing Math/Stats Logic by adding dependency -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6.1</version>
         </dependency>
-        <dependency>
-             <groupId>org.deeplearning4j</groupId>
-             <artifactId>deeplearning4j-core</artifactId>
-             <version>1.0.0-M2.1</version>
-         </dependency>
-         <dependency>
-             <groupId>org.nd4j</groupId>
-             <artifactId>nd4j-native-platform</artifactId>
-             <version>1.0.0-M2.1</version>
-         </dependency>
 
         <!-- Testing -->
         <dependency>
