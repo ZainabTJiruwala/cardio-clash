@@ -27,6 +27,8 @@ services:
         fromDatabase:
           name: cardio-clash-db
           property: password
+      - key: SPRING_JPA_DATABASE_PLATFORM
+        value: org.hibernate.dialect.PostgreSQLDialect
 
 databases:
   - name: cardio-clash-db
