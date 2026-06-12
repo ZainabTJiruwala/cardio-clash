@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cardio-clash-backend
+    runtime: docker
+    plan: free
+    rootDir: backend
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: cardio-clash-db
+          property: jdbcConnectionString
+
+databases:
+  - name: cardio-clash-db
+    databaseName: ecg_db
+    user: ecg_user
+    plan: free
