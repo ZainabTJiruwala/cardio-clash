@@ -23,7 +23,6 @@ spring:
       hibernate:
         format_sql: true
     show-sql: false
-    database-platform: org.hibernate.dialect.H2Dialect
 
   autoconfigure:
     exclude:
