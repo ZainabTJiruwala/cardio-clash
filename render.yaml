@@ -5,10 +5,28 @@ services:
     plan: free
     rootDir: backend
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      - key: DB_HOST
         fromDatabase:
           name: cardio-clash-db
-          property: jdbcConnectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: cardio-clash-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: cardio-clash-db
+          property: database
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: cardio-clash-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: cardio-clash-db
+          property: password
 
 databases:
   - name: cardio-clash-db
